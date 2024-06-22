@@ -8,38 +8,39 @@
 //   shirakawago: ['shirakawago1.jpg', 'shirakawago2.jpg', 'shirakawago3.jpg', 'shirakawago4.jpg'],
 //   thailandia: ['thailandia1.jpg', 'thailandia2.jpg', 'thailandia3.jpg', 'thailandia4.jpg', 'thailandia5.jpg', 'thailandia6.jpg']
 // };
+const basePath = process.env.PUBLIC_URL;
 
 export const collections = {
   "Kyoto": {
-      path: "/images/kyoto/",
+      path: `${basePath}/images/kyoto/`,
       count: 25  // numero di immagini nella collezione Kyoto
   },
   "Tokyo": {
-      path: "/images/tokyo/",
+      path: `${basePath}/images/tokyo/`,
       count: 4  // numero di immagini nella collezione Tokyo
   },
   "Takayama": {
-      path: "/images/takayama/",
+      path: `${basePath}/images/takayama/`,
       count: 9  // numero di immagini nella collezione Takayama
   },
   "Kanazawa": {
-      path: "/images/kanazawa/",
+      path: `${basePath}/images/kanazawa/`,
       count: 4  // numero di immagini nella collezione Kanazawa
   },
   "Nara": {
-      path: "/images/nara/",
+      path: `${basePath}/images/nara/`,
       count: 6  // numero di immagini nella collezione Nara
   },
   "Osaka": {
-      path: "/images/osaka/",
+      path: `${basePath}/images/osaka/`,
       count: 6  // numero di immagini nella collezione Osaka
   },
   "Shirakawago": {
-      path: "/images/shirakawago/",
+      path: `${basePath}/images/shirakawago/`,
       count: 4  // numero di immagini nella collezione Shirakawago
   },
   "Thailandia": {
-      path: "/images/thailandia/",
+      path: `${basePath}/images/thailandia/`,
       count: 6  // numero di immagini nella collezione Thailandia
   }
   // Aggiungi altre collezioni qui
