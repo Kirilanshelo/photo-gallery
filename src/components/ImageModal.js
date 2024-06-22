@@ -16,7 +16,6 @@ const style = {
 };
 
 const ImageModal = ({ open, image, handleClose, dimensions }) => {
-  console.log('#####', dimensions)
     return (
         <Modal open={open} onClose={handleClose}>
             <Box sx={style}>
