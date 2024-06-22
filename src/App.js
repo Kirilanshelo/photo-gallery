@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Container, Typography } from '@mui/material';
+import { collections, generateImagePaths } from './data';
+import CollectionSelector from './components/CollectionSelector';
+import ImageGrid from './components/ImageGrid';
+import ImageModal from './components/ImageModal';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [selectedCollection, setSelectedCollection] = useState(Object.keys(collections)[0]);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imageDimensions, setImageDimensions] = useState({});
+
+    const handleCollectionChange = (event) => {
+        setSelectedCollection(event.target.value);
+    };
+
+    const handleImageClick = (image) => {
+        setSelectedImage(image);
+    };
+
+    const handleCloseModal = () => {
+        setSelectedImage(null);
+    };
+
+    const handleImageLoad = (index, dimensions) => {
+        setImageDimensions((prevDimensions) => ({
+            ...prevDimensions,
+            [index]: dimensions
+        }));
+    };
+
+    return (
+        <Container style={{ backgroundColor: '#1C1C1C', minHeight: '100vh', padding: '2rem' }}>
+            <Typography variant="h1" style={{ color: '#FFFFFF', textAlign: 'center' }}>Galleria Fotografica</Typography>
+            <CollectionSelector
+                collections={collections}
+                selectedCollection={selectedCollection}
+                onChange={handleCollectionChange}
+            />
+            <ImageGrid
+                images={generateImagePaths(selectedCollection)}
+                onImageClick={handleImageClick}
+                onImageLoad={handleImageLoad}
+            />
+            {selectedImage && (
+                <ImageModal
+                    open={!!selectedImage}
+                    image={selectedImage}
+                    handleClose={handleCloseModal}
+                    dimensions={imageDimensions[generateImagePaths(selectedCollection).indexOf(selectedImage)]}
+                />
+            )}
+        </Container>
+    );
+};
 
 export default App;
