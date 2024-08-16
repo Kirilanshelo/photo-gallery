@@ -30,7 +30,14 @@ const App = () => {
     };
 
     return (
-        <Container style={{ backgroundColor: '#1C1C1C', minHeight: '100vh', padding: '2rem' }}>
+        <Container style={{          
+            backgroundColor: '#1C1C1C', 
+            // minHeight: '100vh', 
+            padding: '2rem', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'center' }}>
             <Typography variant="h1" style={{ color: '#FFFFFF', textAlign: 'center' }}>Galleria Fotografica</Typography>
             <CollectionSelector
                 collections={collections}
