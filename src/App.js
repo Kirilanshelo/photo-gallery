@@ -32,7 +32,6 @@ const App = () => {
     return (
         <Container style={{          
             backgroundColor: '#1C1C1C', 
-            // minHeight: '100vh', 
             padding: '2rem', 
             display: 'flex', 
             flexDirection: 'column', 
