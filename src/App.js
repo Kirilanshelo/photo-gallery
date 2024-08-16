@@ -37,7 +37,7 @@ const App = () => {
             flexDirection: 'column', 
             alignItems: 'center', 
             justifyContent: 'center' }}>
-            <Typography variant="h1" style={{ color: '#FFFFFF', textAlign: 'center' }}>Galleria Fotografica</Typography>
+            <Typography variant="h2" style={{ color: '#FFFFFF', textAlign: 'center' }}>Galleria Fotografica</Typography>
             <CollectionSelector
                 collections={collections}
                 selectedCollection={selectedCollection}

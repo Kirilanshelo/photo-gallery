@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 const CollectionSelector = ({ collections, selectedCollection, onChange }) => {
     return (
-        <FormControl fullWidth variant="outlined" margin="normal">
+        <FormControl fullWidth variant="outlined" margin="normal" style={{ margin: '20px'}}>
             <InputLabel style={{ color: '#FFFFFF' }}>Collezione</InputLabel>
             <Select
                 value={selectedCollection}

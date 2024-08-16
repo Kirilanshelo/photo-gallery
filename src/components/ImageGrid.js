@@ -14,8 +14,8 @@ const ImageGrid = ({ images, onImageClick, onImageLoad }) => {
     };
 
     return (
-        <Grid container spacing={2}>
-            <ImageList cols={3} rowHeight={200}>
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <ImageList variant="masonry" cols={3}>
                 {images.map((file, index) => (
                     <ImageListItem key={index} onClick={() => onImageClick(file)}>
                         {isVideo(file) ? (
