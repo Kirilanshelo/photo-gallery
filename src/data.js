@@ -12,43 +12,42 @@ const collectionFileName = {
 const basePath = process.env.PUBLIC_URL;
 
 export const collections = {
-  "Kyoto": {
-      path: `${basePath}/images/kyoto/`,
-      count: 25  // numero di immagini nella collezione Kyoto
-  },
-  "Tokyo": {
-      path: `${basePath}/images/tokyo/`,
-      count: 26 // numero di immagini nella collezione Tokyo
-  },
-  "Takayama": {
-      path: `${basePath}/images/takayama/`,
+    "Tokyo": {
+        path: `${basePath}/images/tokyo/`,
+        count: 26 // numero di immagini nella collezione Tokyo
+    },
+    "Kyoto": {
+        path: `${basePath}/images/kyoto/`,
+        count: 25  // numero di immagini nella collezione Kyoto
+    },
+    "Takayama": {
+        path: `${basePath}/images/takayama/`,
       count: 9  // numero di immagini nella collezione Takayama
-  },
-  "Kanazawa": {
-      path: `${basePath}/images/kanazawa/`,
+    },
+    "Kanazawa": {
+        path: `${basePath}/images/kanazawa/`,
       count: 4  // numero di immagini nella collezione Kanazawa
-  },
-  "Nara": {
-      path: `${basePath}/images/nara/`,
+    },
+    "Nara": {
+        path: `${basePath}/images/nara/`,
       count: 7  // numero di immagini nella collezione Nara
-  },
-  "Osaka": {
-      path: `${basePath}/images/osaka/`,
+    },
+    "Osaka": {
+        path: `${basePath}/images/osaka/`,
       count: 6  // numero di immagini nella collezione Osaka
-  },
-  "Shirakawago": {
-      path: `${basePath}/images/shirakawago/`,
+    },
+    "Shirakawago": {
+        path: `${basePath}/images/shirakawago/`,
       count: 4  // numero di immagini nella collezione Shirakawago
-  },
-  "Thailandia": {
-      path: `${basePath}/images/thailandia/`,
+    },
+    "Thailandia": {
+        path: `${basePath}/images/thailandia/`,
       count: 6  // numero di immagini nella collezione Thailandia
-  }
+    }
 };
 
 // Funzione per generare i percorsi delle immagini
 export const generateImagePaths = (collection) => {
   const { path } = collections[collection];
   return collectionFileName[collection.toLowerCase()].map((fileName) => `${path}${fileName}`);
-//   return Array.from({ length: count }, (_, index) => `${path}${collection.toLowerCase()}${index + 1}.jpg`);
 };

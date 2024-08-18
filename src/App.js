@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Typography } from '@mui/material';
 import { collections, generateImagePaths } from './data';
 import CollectionSelector from './components/CollectionSelector';
@@ -9,18 +9,20 @@ const App = () => {
     const [selectedCollection, setSelectedCollection] = useState(Object.keys(collections)[0]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [imageDimensions, setImageDimensions] = useState({});
+    const [images, setImages] = useState(generateImagePaths(selectedCollection));
 
     const handleCollectionChange = (event) => {
         setSelectedCollection(event.target.value);
     };
 
-    const handleImageClick = (image) => {
+    const handleImageClick = useCallback((image) => {
         setSelectedImage(image);
-    };
-
-    const handleCloseModal = () => {
+    }, []);
+    
+    const handleCloseModal = useCallback(() => {
         setSelectedImage(null);
-    };
+    }, []);
+    
 
     const handleImageLoad = (index, dimensions) => {
         setImageDimensions((prevDimensions) => ({
@@ -28,6 +30,16 @@ const App = () => {
             [index]: dimensions
         }));
     };
+
+    useEffect(() => {
+        // Resetta le immagini caricate quando cambia la collezione selezionata
+        setImages([]);
+        setImageDimensions({});
+        const newImages = generateImagePaths(selectedCollection);
+        setTimeout(() => {
+            setImages(newImages);
+        }, 100)
+    }, [selectedCollection]);
 
     return (
         <Container style={{          
@@ -44,7 +56,7 @@ const App = () => {
                 onChange={handleCollectionChange}
             />
             <ImageGrid
-                images={generateImagePaths(selectedCollection)}
+                images={images}
                 onImageClick={handleImageClick}
                 onImageLoad={handleImageLoad}
             />
@@ -53,11 +65,11 @@ const App = () => {
                     open={!!selectedImage}
                     image={selectedImage}
                     handleClose={handleCloseModal}
-                    dimensions={imageDimensions[generateImagePaths(selectedCollection).indexOf(selectedImage)]}
+                    dimensions={imageDimensions[generateImagePaths(selectedCollection).indexOf(selectedImage)] || {}}
                 />
             )}
         </Container>
     );
 };
 
-export default App;
+export default React.memo(App);
