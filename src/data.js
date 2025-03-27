@@ -9,35 +9,35 @@ const collectionFileName = {
   thailandia: ['thailandia1.jpg', 'thailandia2.jpg', 'thailandia3.jpg', 'thailandia4.jpg', 'thailandia5.jpg', 'thailandia6.jpg']
 };
 
-const basePath = process.env.PUBLIC_URL;
+const basePath = '/photo-gallery';
 
 export const collections = {
     "Tokyo": {
-        path: `${basePath}/images/tokyo/`,
-        count: 26 // numero di immagini nella collezione Tokyo
+      path: `${basePath}/images/tokyo/`,
+      count: 26 // numero di immagini nella collezione Tokyo
     },
     "Kyoto": {
-        path: `${basePath}/images/kyoto/`,
-        count: 25  // numero di immagini nella collezione Kyoto
+      path: `${basePath}/images/kyoto/`,
+      count: 25  // numero di immagini nella collezione Kyoto
     },
     "Takayama": {
-        path: `${basePath}/images/takayama/`,
+      path: `${basePath}/images/takayama/`,
       count: 9  // numero di immagini nella collezione Takayama
     },
     "Kanazawa": {
-        path: `${basePath}/images/kanazawa/`,
+      path: `${basePath}/images/kanazawa/`,
       count: 4  // numero di immagini nella collezione Kanazawa
     },
     "Nara": {
-        path: `${basePath}/images/nara/`,
+      path: `${basePath}/images/nara/`,
       count: 7  // numero di immagini nella collezione Nara
     },
     "Osaka": {
-        path: `${basePath}/images/osaka/`,
+      path: `${basePath}/images/osaka/`,
       count: 6  // numero di immagini nella collezione Osaka
     },
     "Shirakawago": {
-        path: `${basePath}/images/shirakawago/`,
+      path: `${basePath}/images/shirakawago/`,
       count: 4  // numero di immagini nella collezione Shirakawago
     },
     "Thailandia": {

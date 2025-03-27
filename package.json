@@ -1,28 +1,28 @@
 {
   "name": "photo-gallery",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "homepage": "https://kirilanshelo.github.io/photo-gallery",
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.20",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "fs-extra": "^11.3.0",
     "gh-pages": "^6.1.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.1",
+    "primeicons": "^7.0.0",
+    "primevue": "^3.53.1",
+    "sharp": "^0.33.5",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "thumbnails": "node scripts/generateThumbnails.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +41,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "vite": "^6.2.3"
   }
 }
