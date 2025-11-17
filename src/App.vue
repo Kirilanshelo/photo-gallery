@@ -17,7 +17,16 @@
         class="image-item"
         @click="openModal(index)"
       >
-        <img :src="image" :alt="`${selectedAlbum} ${index + 1}`" />
+        <div v-if="!loadedImages[index]" class="image-placeholder">
+          <div class="spinner"></div>
+        </div>
+        <img 
+          :src="image" 
+          :alt="`${selectedAlbum} ${index + 1}`"
+          loading="lazy"
+          @load="onImageLoad(index)"
+          :class="{ loaded: loadedImages[index] }"
+        />
       </div>
     </div>
 
@@ -33,16 +42,22 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { albums, getAlbumImages } from './data.js'
 
 const selectedAlbum = ref(albums[0])
 const currentImages = ref([])
 const modalOpen = ref(false)
 const currentImageIndex = ref(0)
+const loadedImages = ref({})
 
 const loadImages = () => {
   currentImages.value = getAlbumImages(selectedAlbum.value)
+  loadedImages.value = {}
+}
+
+const onImageLoad = (index) => {
+  loadedImages.value[index] = true
 }
 
 const onAlbumChange = () => {
@@ -91,7 +106,7 @@ onUnmounted(() => {
 
 <style scoped>
 .container {
-  background-color: #1C1C1C;
+  background-color: rgb(51, 29, 29);
   min-height: 100vh;
   padding: 2rem;
   display: flex;
@@ -100,7 +115,7 @@ onUnmounted(() => {
 }
 
 h1 {
-  color: #FFFFFF;
+  color: rgb(225, 180, 134);
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -116,15 +131,15 @@ h1 {
   padding: 0.75rem;
   font-size: 1rem;
   border-radius: 4px;
-  border: 1px solid #444;
-  background-color: #2C2C2C;
-  color: #FFFFFF;
+  border: 2px solid rgb(159, 52, 52);
+  background-color: rgb(51, 29, 29);
+  color: rgb(225, 180, 134);
   cursor: pointer;
 }
 
 .album-selector:focus {
   outline: none;
-  border-color: #666;
+  border-color: rgb(225, 180, 134);
 }
 
 .image-grid {
@@ -140,17 +155,49 @@ h1 {
   overflow: hidden;
   border-radius: 8px;
   aspect-ratio: 1;
-  background-color: #2C2C2C;
+  background-color: rgb(51, 29, 29);
+  border: 2px solid rgb(159, 52, 52);
+  position: relative;
+}
+
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(51, 29, 29);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgb(159, 52, 52);
+  border-top-color: rgb(225, 180, 134);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .image-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
 }
 
-.image-item:hover img {
+.image-item img.loaded {
+  opacity: 1;
+}
+
+.image-item:hover img.loaded {
   transform: scale(1.05);
 }
 
@@ -160,7 +207,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(51, 29, 29, 0.95);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,52 +216,77 @@ h1 {
 
 .modal-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
+  max-width: calc(90vw - 6rem);
+  max-height: calc(90vh - 6rem);
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(51, 29, 29);
+  border: 3px solid rgb(159, 52, 52);
+  border-radius: 8px;
+  padding: 3rem;
 }
 
 .modal-content img {
   max-width: 100%;
-  max-height: 90vh;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  border-radius: 4px;
+  display: block;
 }
 
 .close-btn {
   position: absolute;
-  top: -40px;
-  right: 0;
+  top: 10px;
+  right: 10px;
   background: none;
   border: none;
-  color: white;
-  font-size: 3rem;
+  color: rgb(225, 180, 134);
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: rgb(159, 52, 52);
 }
 
 .nav-btn {
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
   border: none;
-  color: white;
+  color: rgb(225, 180, 134);
   font-size: 2rem;
-  padding: 1rem;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   z-index: 1001;
-  transition: background-color 0.3s;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-btn:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  color: rgb(159, 52, 52);
 }
 
 .nav-btn.prev {
-  left: -60px;
+  left: 10px;
 }
 
 .nav-btn.next {
-  right: -60px;
+  right: 10px;
 }
 </style>
