@@ -1,7 +1,7 @@
 const albumData = {
   kanazawa: ['kanazawa1.jpg', 'kanazawa2.jpg', 'kanazawa3.jpg', 'kanazawa4.jpg'],
   kyoto: ['kyoto0.jpg', 'kyoto1.jpg', 'kyoto2.jpg', 'kyoto3.jpg', 'kyoto4.jpg', 'kyoto5.jpg', 'kyoto6.jpg', 'kyoto7.jpg', 'kyoto8.jpg', 'kyoto9.jpg', 'kyoto10.jpg', 'kyoto11.jpg', 'kyoto12.jpg', 'kyoto13.jpg', 'kyoto14.jpg', 'kyoto15.jpg', 'kyoto16.jpg', 'kyoto17.jpg', 'kyoto18.jpg', 'kyoto19.jpg', 'kyoto20.jpg', 'kyoto21.jpg', 'kyoto22.jpg', 'kyoto23.jpg', 'kyoto24.jpg'],
-  nara: ['nara1.jpg', 'nara2.jpg', 'nara3.jpg', 'nara4.jpg', 'nara5.jpg', 'nara6.jpg'],
+  nara: ['nara1.jpg', 'nara2.jpg', 'nara3.jpg', 'nara4.jpg', 'nara5.jpg', 'nara6.jpg', 'nara7.mp4'],
   osaka: ['osaka1.jpg', 'osaka2.jpg', 'osaka3.jpg', 'osaka4.jpg', 'osaka5.jpg', 'osaka6.jpg'],
   shirakawago: ['shirakawago1.jpg', 'shirakawago2.jpg', 'shirakawago3.jpg', 'shirakawago4.jpg'],
   takayama: ['takayama1.jpg', 'takayama2.jpg', 'takayama3.jpg', 'takayama4.jpg', 'takayama5.jpg', 'takayama6.jpg', 'takayama7.jpg', 'takayama8.jpg', 'takayama9.jpg'],

@@ -12,7 +12,7 @@
 
     <div class="image-grid">
       <div 
-        v-for="(image, index) in currentImages" 
+        v-for="(media, index) in currentImages" 
         :key="index"
         class="image-item"
         @click="openModal(index)"
@@ -20,8 +20,16 @@
         <div v-if="!loadedImages[index]" class="image-placeholder">
           <div class="spinner"></div>
         </div>
+        <video 
+          v-if="isVideo(media)"
+          :src="media"
+          @loadeddata="onImageLoad(index)"
+          :class="{ loaded: loadedImages[index] }"
+          muted
+        />
         <img 
-          :src="image" 
+          v-else
+          :src="media" 
           :alt="`${selectedAlbum} ${index + 1}`"
           loading="lazy"
           @load="onImageLoad(index)"
@@ -34,7 +42,18 @@
       <div class="modal-content" @click.stop>
         <button class="close-btn" @click="closeModal">&times;</button>
         <button class="nav-btn prev" @click="prevImage" v-if="currentImages.length > 1">&lt;</button>
-        <img :src="currentImages[currentImageIndex]" :alt="`${selectedAlbum} ${currentImageIndex + 1}`" />
+        <video 
+          v-if="isVideo(currentImages[currentImageIndex])"
+          :src="currentImages[currentImageIndex]"
+          controls
+          autoplay
+          ref="modalVideo"
+        />
+        <img 
+          v-else
+          :src="currentImages[currentImageIndex]" 
+          :alt="`${selectedAlbum} ${currentImageIndex + 1}`" 
+        />
         <button class="nav-btn next" @click="nextImage" v-if="currentImages.length > 1">&gt;</button>
       </div>
     </div>
@@ -50,6 +69,11 @@ const currentImages = ref([])
 const modalOpen = ref(false)
 const currentImageIndex = ref(0)
 const loadedImages = ref({})
+const modalVideo = ref(null)
+
+const isVideo = (src) => {
+  return src && src.endsWith('.mp4')
+}
 
 const loadImages = () => {
   currentImages.value = getAlbumImages(selectedAlbum.value)
@@ -71,6 +95,9 @@ const openModal = (index) => {
 }
 
 const closeModal = () => {
+  if (modalVideo.value) {
+    modalVideo.value.pause()
+  }
   modalOpen.value = false
 }
 
@@ -185,7 +212,8 @@ h1 {
   to { transform: rotate(360deg); }
 }
 
-.image-item img {
+.image-item img,
+.image-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -193,11 +221,13 @@ h1 {
   opacity: 0;
 }
 
-.image-item img.loaded {
+.image-item img.loaded,
+.image-item video.loaded {
   opacity: 1;
 }
 
-.image-item:hover img.loaded {
+.image-item:hover img.loaded,
+.image-item:hover video.loaded {
   transform: scale(1.05);
 }
 
@@ -216,8 +246,6 @@ h1 {
 
 .modal-content {
   position: relative;
-  max-width: calc(90vw - 6rem);
-  max-height: calc(90vh - 6rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -225,13 +253,16 @@ h1 {
   border: 3px solid rgb(159, 52, 52);
   border-radius: 8px;
   padding: 3rem;
+  max-width: min(90vw, calc(90vh * 16 / 9));
+  max-height: min(90vh, calc(90vw * 9 / 16));
 }
 
-.modal-content img {
+.modal-content img,
+.modal-content video {
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   border-radius: 4px;
   display: block;
