@@ -1,0 +1,5 @@
+- Il progetto deve essere scritto usando Vue3 sfruttando le composition API
+- Crea un'interfaccia che mostri in alto una drop down con la possibilità di scegliere una lista di album.
+- I nomi degli album sono dentro la cartella public/images
+- Una volta selezionato l'album va mostrata una griglia di foto con tutte le foto nella cartella omonima
+- Cliccando su una foto deve essere mostrata la foto in primo piano con le dimensioni originali e la possibilità di scorrere tra le foto dell'album
