@@ -10,6 +10,11 @@
 
 # production
 /build
+/dist
+
+# original full-resolution media (kept locally only; web-ready copies live in
+# src/assets/images and are generated via `npm run images`)
+/originals
 
 # misc
 .DS_Store
